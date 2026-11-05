@@ -23,11 +23,9 @@ export const MARKETING_CHANNELS = [
   'Google Ads',
   'Meta Ads',
   'SEO',
-  'LinkedIn Ads',
-  'Email Marketing',
-  'Content Marketing',
-  'Social Media Organic',
-  'TikTok Ads',
+  'Social Media',
+  'Content',
+  'Other',
 ]
 
 export const GROWTH_PERIODS = [
@@ -37,34 +35,26 @@ export const GROWTH_PERIODS = [
   { value: '12', label: '12 months' },
 ]
 
+export const CONSULTATION_TOPICS = [
+  'Marketing strategy',
+  'Google Ads & paid media',
+  'SEO & organic growth',
+  'Social media marketing',
+  'Full growth plan',
+]
+
 export const DEFAULT_INPUTS = {
   industry: 'Professional Services',
   businessModel: 'Service-based',
   currentMonthlyRevenue: 30000,
+  desiredMonthlyRevenue: 50000,
   avgRevenuePerCustomer: 500,
   currentMonthlyCustomers: 60,
-  desiredMonthlyRevenue: 50000,
   currentMarketingBudget: 2000,
-  marketingChannels: ['Google Ads', 'Meta Ads', 'SEO'],
+  marketingChannels: ['Google Ads', 'Meta Ads'],
   costPerLead: 25,
   leadConversionRate: 10,
   grossProfitMargin: 50,
   agencyFees: 1000,
   growthPeriod: '3',
-}
-
-export const FIELD_TOOLTIPS = {
-  industry: 'Helps contextualise benchmarks — projections still use your custom inputs.',
-  businessModel: 'How your business earns revenue (services, products, etc.).',
-  currentMonthlyRevenue: 'Average revenue per month before growth initiatives.',
-  avgRevenuePerCustomer: 'Typical revenue from one new customer in the period.',
-  currentMonthlyCustomers: 'Approximate active customers or clients per month.',
-  desiredMonthlyRevenue: 'Your revenue goal for the selected growth period.',
-  currentMarketingBudget: 'What you currently spend on marketing each month.',
-  marketingChannels: 'Channels you use or plan to use — for planning only.',
-  costPerLead: 'Estimated average cost to acquire one marketing lead.',
-  leadConversionRate: 'Percentage of leads that become paying customers.',
-  grossProfitMargin: 'Share of revenue left after direct costs (COGS).',
-  agencyFees: 'Monthly agency, creative, or other non-ad marketing fees.',
-  growthPeriod: 'Timeframe over which you want to reach your revenue target.',
 }

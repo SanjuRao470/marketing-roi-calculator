@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-bmm-navy antialiased;
+    @apply bg-bmm-canvas font-sans text-bmm-ink antialiased;
   }
 
   input[type='number']::-webkit-inner-spin-button,
@@ -18,8 +18,16 @@
   }
 }
 
-@layer utilities {
-  .scrollbar-thin {
-    scrollbar-width: thin;
+@layer components {
+  .field-input {
+    @apply w-full rounded-lg border border-bmm-line bg-white px-3 py-2.5 text-sm text-bmm-ink outline-none transition focus:border-bmm-blue focus:ring-2 focus:ring-bmm-blue/15;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-bmm-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-bmm-blue-hover;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-bmm-line bg-white px-5 py-2.5 text-sm font-medium text-bmm-ink transition hover:bg-gray-50;
   }
 }
