@@ -3,18 +3,31 @@ import { SiteFooter, SiteHeader } from '../components/layout/SiteChrome'
 export default function LandingPage({ onStart }) {
   return (
     <div className="min-h-screen bg-bmm-canvas px-3 py-6 sm:px-6 sm:py-10">
-      <div className="mx-auto max-w-5xl overflow-hidden rounded-4xl bg-white shadow-shell">
+      <div className="mx-auto max-w-landing overflow-hidden rounded-4xl bg-white shadow-shell">
         <SiteHeader onGetStarted={onStart} />
 
         <div className="px-6 pb-8 sm:px-10 sm:pb-10">
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A1628] via-[#0F2744] to-[#1A3A5C] px-8 py-12 text-white shadow-hero sm:px-12 sm:py-14">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bmm-navy-deep via-[#1e3a5f] to-bmm-blue-figma px-8 py-12 text-white shadow-hero sm:px-12 sm:py-14">
+            <div
+              className="pointer-events-none absolute -right-8 -top-8 h-48 w-48 rounded-full border border-white/10"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute right-8 top-8 h-32 w-32 rounded-full border border-white/10"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute right-20 top-16 h-20 w-20 rounded-full border border-sky-400/20"
+              aria-hidden
+            />
+
+            <p className="relative text-[11px] font-bold uppercase tracking-[0.22em] text-white/75">
               Your business. Your next level.
             </p>
-            <h1 className="mt-4 max-w-xl text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.65rem]">
+            <h1 className="relative mt-4 max-w-xl text-3xl font-bold leading-[1.12] sm:text-hero">
               Make your next marketing move a smarter one.
             </h1>
-            <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/75 sm:text-base">
+            <p className="relative mt-4 max-w-lg text-sm leading-relaxed text-white/80 sm:text-[15px]">
               Discover the marketing investment, leads and customer growth you may
               need to reach your revenue goals. Build your growth scenario in
               minutes.
@@ -22,12 +35,12 @@ export default function LandingPage({ onStart }) {
             <button
               type="button"
               onClick={onStart}
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-bmm-navy transition hover:bg-gray-100"
+              className="relative mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-bmm-navy-deep transition hover:bg-gray-100"
             >
               Calculate my growth
               <span aria-hidden>→</span>
             </button>
-            <p className="mt-4 text-xs text-white/55">
+            <p className="relative mt-4 text-xs text-white/55">
               Free calculator · Instant projections · Australian businesses
             </p>
           </div>
@@ -40,10 +53,10 @@ export default function LandingPage({ onStart }) {
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-xl border border-bmm-line bg-white px-5 py-5 text-center"
+                className="rounded-xl border border-bmm-line bg-white px-5 py-6 text-center shadow-card"
               >
-                <p className="text-2xl font-bold text-bmm-ink">{item.stat}</p>
-                <p className="mt-1 text-xs text-bmm-muted">{item.label}</p>
+                <p className="text-[1.65rem] font-bold text-bmm-ink">{item.stat}</p>
+                <p className="mt-1.5 text-xs leading-snug text-bmm-muted">{item.label}</p>
               </div>
             ))}
           </div>
@@ -68,18 +81,18 @@ export default function LandingPage({ onStart }) {
             ].map((card) => (
               <div
                 key={card.step}
-                className="rounded-xl border border-bmm-line bg-white p-5"
+                className="rounded-xl border border-bmm-line bg-white p-5 shadow-card"
               >
                 <p className="text-[11px] font-bold uppercase tracking-wide text-bmm-blue">
                   {card.step}
                 </p>
-                <h2 className="mt-2 font-bold text-bmm-ink">{card.title}</h2>
-                <p className="mt-2 text-sm text-bmm-muted">{card.body}</p>
+                <h2 className="mt-2 text-base font-bold text-bmm-ink">{card.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-bmm-muted">{card.body}</p>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 text-center text-[11px] leading-relaxed text-bmm-muted">
+          <p className="mt-6 text-center text-[11px] leading-relaxed text-bmm-muted-light">
             *Company-reported figures shown for design context. This calculator
             provides illustrative estimates, not guaranteed marketing outcomes.
           </p>

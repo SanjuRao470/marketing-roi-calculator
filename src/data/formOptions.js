@@ -58,3 +58,23 @@ export const DEFAULT_INPUTS = {
   agencyFees: 1000,
   growthPeriod: '3',
 }
+
+export const FIELD_TOOLTIPS = {
+  industry:
+    'Used for context only — projections are driven by your revenue and marketing inputs.',
+  businessModel: 'How your business primarily earns revenue.',
+  currentMonthlyRevenue: 'Average monthly revenue before growth initiatives (AUD).',
+  desiredMonthlyRevenue: 'The monthly revenue target you want to model.',
+  avgRevenuePerCustomer:
+    'Average revenue from a new customer in the measurement period (not LTV unless you enter LTV).',
+  currentMonthlyCustomers: 'Approximate customers or active clients per month.',
+  currentMarketingBudget:
+    'Paid media only — exclude agency retainers (enter those separately).',
+  costPerLead: 'Average cost to acquire one marketing lead across channels.',
+  leadConversionRate: 'Share of leads that become paying customers.',
+  grossProfitMargin:
+    'Revenue minus direct costs (COGS). ROI uses gross profit, not revenue.',
+  agencyFees: 'Monthly agency, creative, or other non-ad marketing fees.',
+  growthPeriod: 'Timeframe for reaching your revenue target.',
+  marketingChannels: 'Channels you use or plan to use (planning context only).',
+}

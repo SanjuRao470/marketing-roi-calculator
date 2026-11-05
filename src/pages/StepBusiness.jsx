@@ -5,7 +5,11 @@ import {
   SelectField,
   StepIntro,
 } from '../components/ui/FormControls'
-import { BUSINESS_MODELS, INDUSTRIES } from '../data/formOptions'
+import {
+  BUSINESS_MODELS,
+  FIELD_TOOLTIPS,
+  INDUSTRIES,
+} from '../data/formOptions'
 
 export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
   const set = (key) => (value) => onChange({ ...inputs, [key]: value })
@@ -22,6 +26,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <SelectField
           id="industry"
           label="What industry are you in?"
+          tooltip={FIELD_TOOLTIPS.industry}
           value={inputs.industry}
           onChange={set('industry')}
           options={INDUSTRIES}
@@ -29,6 +34,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <SelectField
           id="businessModel"
           label="Business model"
+          tooltip={FIELD_TOOLTIPS.businessModel}
           value={inputs.businessModel}
           onChange={set('businessModel')}
           options={BUSINESS_MODELS}
@@ -36,6 +42,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="currentMonthlyRevenue"
           label="Current monthly revenue (AUD)"
+          tooltip={FIELD_TOOLTIPS.currentMonthlyRevenue}
           hint="Your average revenue in a typical month."
           value={inputs.currentMonthlyRevenue}
           onChange={set('currentMonthlyRevenue')}
@@ -44,6 +51,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="desiredMonthlyRevenue"
           label="Desired monthly revenue (AUD)"
+          tooltip={FIELD_TOOLTIPS.desiredMonthlyRevenue}
           hint="The monthly revenue you want to work towards."
           value={inputs.desiredMonthlyRevenue}
           onChange={set('desiredMonthlyRevenue')}
@@ -52,6 +60,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="avgRevenuePerCustomer"
           label="Average revenue per new customer (AUD)"
+          tooltip={FIELD_TOOLTIPS.avgRevenuePerCustomer}
           hint="Average initial customer revenue, not lifetime value unless specified."
           value={inputs.avgRevenuePerCustomer}
           onChange={set('avgRevenuePerCustomer')}
@@ -60,6 +69,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
         <NumberField
           id="currentMonthlyCustomers"
           label="Current monthly customers"
+          tooltip={FIELD_TOOLTIPS.currentMonthlyCustomers}
           value={inputs.currentMonthlyCustomers}
           onChange={set('currentMonthlyCustomers')}
         />
@@ -67,7 +77,7 @@ export default function StepBusiness({ inputs, onChange, onBack, onNext }) {
 
       <FormActions
         onBack={onBack}
-        backLabel="← Back"
+        backLabel="Back"
         primaryLabel="Continue to marketing →"
         onPrimary={onNext}
       />

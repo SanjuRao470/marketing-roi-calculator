@@ -1,3 +1,5 @@
+import { IconFilter } from '../ui/Icons'
+
 const STEPS = [
   { id: 1, label: 'Business' },
   { id: 2, label: 'Marketing' },
@@ -9,20 +11,19 @@ export default function StepProgress({ currentStep }) {
   return (
     <nav
       aria-label="Progress"
-      className="border-b border-bmm-line px-6 py-5 sm:px-8"
+      className="flex items-center border-b border-bmm-line px-6 py-5 sm:px-8"
     >
-      <ol className="mx-auto flex max-w-3xl items-center justify-between">
+      <ol className="mx-auto flex w-full max-w-2xl flex-1 items-center justify-between">
         {STEPS.map((step, index) => {
           const done = currentStep > step.id
           const active = currentStep === step.id
+          const reached = done || active
           return (
             <li key={step.id} className="flex flex-1 items-center">
               <div className="flex min-w-0 flex-col items-center gap-1.5">
                 <span
                   className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold ${
-                    done || active
-                      ? 'bg-bmm-blue text-white'
-                      : 'bg-gray-200 text-gray-500'
+                    reached ? 'bg-bmm-blue text-white' : 'bg-gray-200 text-gray-500'
                   }`}
                 >
                   {done ? (
@@ -40,7 +41,7 @@ export default function StepProgress({ currentStep }) {
                   )}
                 </span>
                 <span
-                  className={`text-xs font-semibold ${
+                  className={`text-[11px] font-semibold ${
                     active ? 'text-bmm-blue' : done ? 'text-bmm-ink' : 'text-gray-400'
                   }`}
                 >
@@ -49,7 +50,7 @@ export default function StepProgress({ currentStep }) {
               </div>
               {index < STEPS.length - 1 && (
                 <div
-                  className={`mx-2 hidden h-px flex-1 sm:block ${
+                  className={`mx-1 hidden h-0.5 flex-1 sm:block ${
                     currentStep > step.id ? 'bg-bmm-blue' : 'bg-gray-200'
                   }`}
                   aria-hidden
@@ -59,6 +60,15 @@ export default function StepProgress({ currentStep }) {
           )
         })}
       </ol>
+      {currentStep === 3 && (
+        <button
+          type="button"
+          className="ml-2 hidden rounded-lg border border-bmm-line p-2 text-bmm-muted hover:bg-gray-50 sm:block"
+          aria-label="Filter view"
+        >
+          <IconFilter />
+        </button>
+      )}
     </nav>
   )
 }

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import {
-  FormActions,
   SelectField,
   StepIntro,
   TextField,
 } from '../components/ui/FormControls'
+import { IconArrowLeft, IconRefresh } from '../components/ui/Icons'
 import { CONSULTATION_TOPICS } from '../data/formOptions'
 import { formatCurrency, formatNumber } from '../utils/calculations'
 
@@ -35,11 +35,11 @@ export default function StepConsultation({
       <StepIntro
         eyebrow="Your next move"
         title="Let's turn your growth goals into a strategy."
-        description="Share a few details and we'll follow up to discuss your scenario, validate assumptions and outline practical next steps."
+        description="These results are a starting point. Share your details and we'll help you pressure-test assumptions and outline practical next steps."
       />
 
       <div className="grid gap-6 lg:grid-cols-5">
-        <div className="rounded-xl border border-bmm-line p-5 lg:col-span-3">
+        <div className="rounded-xl border border-bmm-line p-5 shadow-card lg:col-span-3">
           <h2 className="text-sm font-semibold text-bmm-ink">
             Request a strategy consultation
           </h2>
@@ -114,27 +114,27 @@ export default function StepConsultation({
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-bmm-blue">
             Your estimate
           </p>
-          <p className="mt-3 text-3xl font-bold text-bmm-ink">
+          <p className="mt-3 text-[2rem] font-bold tabular-nums leading-none text-bmm-ink">
             {formatCurrency(inputs.desiredMonthlyRevenue)}
           </p>
-          <p className="text-xs text-bmm-muted">Desired monthly revenue</p>
+          <p className="mt-1 text-xs text-bmm-muted">Desired monthly revenue</p>
 
-          <dl className="mt-6 space-y-3 border-t border-bmm-line pt-4 text-sm">
-            <div className="flex justify-between gap-4">
+          <dl className="mt-6 space-y-0 divide-y divide-bmm-line border-t border-bmm-line text-sm">
+            <div className="flex justify-between gap-4 py-3">
               <dt className="text-bmm-muted">Additional revenue target</dt>
-              <dd className="font-semibold">
+              <dd className="font-semibold tabular-nums">
                 {formatCurrency(projections.additionalRevenue)}
               </dd>
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between gap-4 py-3">
               <dt className="text-bmm-muted">Estimated leads needed</dt>
-              <dd className="font-semibold">
+              <dd className="font-semibold tabular-nums">
                 {formatNumber(projections.requiredLeads, 0)}
               </dd>
             </div>
-            <div className="flex justify-between gap-4">
+            <div className="flex justify-between gap-4 py-3">
               <dt className="text-bmm-muted">Estimated monthly investment</dt>
-              <dd className="font-semibold">
+              <dd className="font-semibold tabular-nums">
                 {formatCurrency(projections.totalMarketingInvestment)}
               </dd>
             </div>
@@ -145,7 +145,7 @@ export default function StepConsultation({
             validate your numbers against your industry, audience, campaign
             history and sales capacity.
           </div>
-          <p className="mt-4 text-[11px] text-bmm-muted">
+          <p className="mt-4 text-[11px] leading-relaxed text-bmm-muted">
             Blue Moon Marketing · Australian digital marketing and business growth
             partner.
           </p>
@@ -154,10 +154,12 @@ export default function StepConsultation({
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-between">
         <button type="button" onClick={onBack} className="btn-outline">
-          ← Back to results
+          <IconArrowLeft />
+          Back to results
         </button>
         <button type="button" onClick={onRestart} className="btn-outline">
-          Start again ↺
+          Start again
+          <IconRefresh />
         </button>
       </div>
     </>

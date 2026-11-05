@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import CalculatorShell from './components/layout/CalculatorShell'
 import LandingPage from './pages/LandingPage'
 import StepBusiness from './pages/StepBusiness'
@@ -6,7 +6,11 @@ import StepConsultation from './pages/StepConsultation'
 import StepMarketing from './pages/StepMarketing'
 import StepResults from './pages/StepResults'
 import { DEFAULT_INPUTS } from './data/formOptions'
-import { SCENARIOS, computeProjections } from './utils/calculations'
+import {
+  SCENARIOS,
+  computeProjections,
+  matchScenario,
+} from './utils/calculations'
 
 export default function App() {
   const [view, setView] = useState('landing')
@@ -15,6 +19,12 @@ export default function App() {
   const [activeScenario, setActiveScenario] = useState('expected')
 
   const projections = useMemo(() => computeProjections(inputs), [inputs])
+
+  const updateInputs = useCallback((next) => {
+    setInputs(next)
+    const matched = matchScenario(next)
+    if (matched) setActiveScenario(matched)
+  }, [])
 
   const startCalculator = () => {
     setView('calculator')
@@ -48,7 +58,7 @@ export default function App() {
     content = (
       <StepBusiness
         inputs={inputs}
-        onChange={setInputs}
+        onChange={updateInputs}
         onBack={() => setView('landing')}
         onNext={() => setStep(2)}
       />
@@ -57,7 +67,7 @@ export default function App() {
     content = (
       <StepMarketing
         inputs={inputs}
-        onChange={setInputs}
+        onChange={updateInputs}
         onBack={() => setStep(1)}
         onNext={() => setStep(3)}
       />

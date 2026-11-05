@@ -6,7 +6,11 @@ import {
   SliderField,
   StepIntro,
 } from '../components/ui/FormControls'
-import { GROWTH_PERIODS, MARKETING_CHANNELS } from '../data/formOptions'
+import {
+  FIELD_TOOLTIPS,
+  GROWTH_PERIODS,
+  MARKETING_CHANNELS,
+} from '../data/formOptions'
 
 export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
   const set = (key) => (value) => onChange({ ...inputs, [key]: value })
@@ -23,6 +27,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="currentMarketingBudget"
           label="Current monthly advertising budget (AUD)"
+          tooltip={FIELD_TOOLTIPS.currentMarketingBudget}
           hint="Paid media spend only; excludes agency fees."
           value={inputs.currentMarketingBudget}
           onChange={set('currentMarketingBudget')}
@@ -31,6 +36,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="agencyFees"
           label="Monthly agency / other marketing fees (AUD)"
+          tooltip={FIELD_TOOLTIPS.agencyFees}
           value={inputs.agencyFees}
           onChange={set('agencyFees')}
           step={100}
@@ -38,6 +44,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <CurrencyField
           id="costPerLead"
           label="Estimated cost per lead (AUD)"
+          tooltip={FIELD_TOOLTIPS.costPerLead}
           hint="Use your own campaign data where available."
           value={inputs.costPerLead}
           onChange={set('costPerLead')}
@@ -45,6 +52,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <SliderField
           id="leadConversionRate"
           label="Lead-to-customer conversion rate"
+          tooltip={FIELD_TOOLTIPS.leadConversionRate}
           value={inputs.leadConversionRate}
           onChange={set('leadConversionRate')}
           min={1}
@@ -54,6 +62,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <SliderField
           id="grossProfitMargin"
           label="Gross profit margin"
+          tooltip={FIELD_TOOLTIPS.grossProfitMargin}
           value={inputs.grossProfitMargin}
           onChange={set('grossProfitMargin')}
           min={5}
@@ -63,6 +72,7 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
         <SelectField
           id="growthPeriod"
           label="Growth measurement period"
+          tooltip={FIELD_TOOLTIPS.growthPeriod}
           value={inputs.growthPeriod}
           onChange={set('growthPeriod')}
           options={GROWTH_PERIODS}
@@ -81,12 +91,15 @@ export default function StepMarketing({ inputs, onChange, onBack, onNext }) {
       </div>
 
       <p className="mt-6 text-xs leading-relaxed text-bmm-muted">
-        Benchmarks are starting points only. You can edit every assumption to
-        reflect your business, industry and historical performance.
+        Benchmarks are editable assumptions, not verified Blue Moon client averages.
+        Actual cost per lead and conversion rates vary by industry, channel, offer
+        and sales process.
       </p>
 
       <FormActions
         onBack={onBack}
+        backLabel="Back"
+        backIcon="minus"
         primaryLabel="Calculate my growth →"
         onPrimary={onNext}
       />
