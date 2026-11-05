@@ -9,7 +9,7 @@ import {
 
 function MetricTile({ label, value, sub, accent }) {
   return (
-    <div className="rounded-xl border border-bmm-line bg-white p-4 shadow-card">
+    <div className="rounded-xl border border-bmm-line bg-white p-4">
       <p className="text-xs text-bmm-muted">{label}</p>
       <p
         className={`mt-1 text-xl font-bold tabular-nums sm:text-2xl ${
@@ -26,21 +26,9 @@ function MetricTile({ label, value, sub, accent }) {
 function RevenueBars({ current, target, projected }) {
   const max = Math.max(current, target, projected, 1)
   const rows = [
-    {
-      label: 'Current',
-      value: current,
-      className: 'bg-gradient-to-r from-bmm-navy to-bmm-bar-mid',
-    },
-    {
-      label: 'Target',
-      value: target,
-      className: 'bg-bmm-bar-light',
-    },
-    {
-      label: 'Projected',
-      value: projected,
-      className: 'bg-bmm-blue',
-    },
+    { label: 'Current', value: current, className: 'bg-bmm-bar-light' },
+    { label: 'Target', value: target, className: 'bg-bmm-blue' },
+    { label: 'Projected', value: projected, className: 'bg-bmm-navy' },
   ]
 
   return (
@@ -57,33 +45,6 @@ function RevenueBars({ current, target, projected }) {
             <div
               className={`h-full rounded-full ${row.className}`}
               style={{ width: `${(row.value / max) * 100}%` }}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function InvestmentBreakdown({ advertising, agency }) {
-  const total = advertising + agency || 1
-  return (
-    <div className="space-y-3">
-      {[
-        { label: 'Advertising', value: advertising, color: 'bg-bmm-blue' },
-        { label: 'Agency & other fees', value: agency, color: 'bg-bmm-bar-mid' },
-      ].map((row) => (
-        <div key={row.label}>
-          <div className="mb-1 flex justify-between text-xs">
-            <span className="text-bmm-muted">{row.label}</span>
-            <span className="font-semibold tabular-nums text-bmm-ink">
-              {formatCurrency(row.value)}
-            </span>
-          </div>
-          <div className="h-2.5 overflow-hidden rounded-full bg-gray-100">
-            <div
-              className={`h-full rounded-full ${row.color}`}
-              style={{ width: `${(row.value / total) * 100}%` }}
             />
           </div>
         </div>
@@ -177,32 +138,13 @@ export default function StepResults({
         />
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <MetricTile
-          label="Additional marketing fees"
-          value={formatCurrency(projections.agencyFees)}
-        />
-        <MetricTile
-          label="Projected additional revenue"
-          value={formatCurrency(projections.projectedAdditionalRevenue)}
-        />
-        <MetricTile
-          label="Estimated ROAS"
-          value={formatRoas(projections.roas, 2)}
-          sub="Revenue ÷ ad spend"
-        />
-      </div>
-
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <div className="rounded-xl border border-bmm-line p-5 shadow-card">
+        <div className="rounded-xl border border-bmm-line p-5">
           <div className="mb-4 flex items-center justify-between gap-2">
             <h3 className="font-semibold text-bmm-ink">Revenue opportunity</h3>
-            <button
-              type="button"
-              className="text-[11px] font-semibold text-bmm-blue hover:underline"
-            >
+            <span className="rounded-full bg-bmm-blue-soft px-2.5 py-0.5 text-[11px] font-semibold text-bmm-blue">
               Monthly view
-            </button>
+            </span>
           </div>
           <RevenueBars
             current={projections.currentRevenue}
@@ -210,12 +152,12 @@ export default function StepResults({
             projected={projections.targetRevenue}
           />
           <p className="mt-4 text-[11px] leading-relaxed text-bmm-muted">
-            “Projected” reflects current revenue plus your additional revenue goal
-            when assumptions are achieved within the measurement period.
+            Projected revenue includes current revenue plus the additional revenue
+            goal when your conversion and lead-cost assumptions are achieved.
           </p>
         </div>
 
-        <div className="rounded-xl border border-bmm-line p-5 shadow-card">
+        <div className="rounded-xl border border-bmm-line p-5">
           <h3 className="mb-2 font-semibold text-bmm-ink">
             Lead-to-customer funnel
           </h3>
@@ -226,20 +168,7 @@ export default function StepResults({
         </div>
       </div>
 
-      <div className="mt-4 rounded-xl border border-bmm-line p-5 shadow-card">
-        <h3 className="font-semibold text-bmm-ink">Marketing investment breakdown</h3>
-        <p className="mt-1 text-xs text-bmm-muted">
-          Estimated monthly split between paid media and other marketing fees.
-        </p>
-        <div className="mt-4">
-          <InvestmentBreakdown
-            advertising={projections.advertisingInvestment}
-            agency={projections.agencyFees}
-          />
-        </div>
-      </div>
-
-      <div className="mt-6 rounded-xl border border-bmm-line p-5 shadow-card">
+      <div className="mt-6 rounded-xl border border-bmm-line p-5">
         <h3 className="font-semibold text-bmm-ink">Explore scenarios</h3>
         <p className="mt-1 text-xs text-bmm-muted">
           Compare the effect of different lead costs and conversion assumptions.
@@ -263,7 +192,7 @@ export default function StepResults({
                     key={row.id}
                     onClick={() => onScenarioSelect(row.id)}
                     className={`cursor-pointer border-b border-bmm-line last:border-0 ${
-                      selected ? 'bg-bmm-blue-soft' : 'hover:bg-gray-50'
+                      selected ? 'bg-bmm-blue-soft/60' : 'hover:bg-gray-50'
                     } ${isExpected ? 'font-semibold' : ''}`}
                   >
                     <td className="py-3 text-bmm-ink">{row.label}</td>
@@ -282,25 +211,10 @@ export default function StepResults({
         </div>
       </div>
 
-      <div className="mt-6 rounded-xl border border-dashed border-bmm-blue/30 bg-bmm-blue-soft/40 p-5">
-        <h3 className="text-sm font-semibold text-bmm-ink">Recommended next steps</h3>
-        <ol className="mt-3 list-decimal space-y-2 pl-4 text-sm text-bmm-muted">
-          <li>
-            Compare conservative and optimistic scenarios before committing budget.
-          </li>
-          <li>
-            Validate cost per lead and conversion against your recent campaigns.
-          </li>
-          <li>
-            Book a strategy consultation to turn projections into an actionable plan.
-          </li>
-        </ol>
-      </div>
-
-      <p className="mt-6 text-xs leading-relaxed text-bmm-muted">
+      <p className="mt-6 text-[11px] leading-relaxed text-bmm-muted">
         ROI uses estimated incremental gross profit minus total marketing investment.
-        Revenue, gross profit, marketing ROI and ROAS are estimated separately and
-        are not guaranteed outcomes.
+        These forecasts are illustrative only and depend on campaign quality, sales
+        process, and market conditions — they are not guaranteed outcomes.
       </p>
 
       <FormActions

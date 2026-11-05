@@ -95,12 +95,7 @@ export default function App() {
   }
 
   return (
-    <CalculatorShell
-      step={step}
-      onGetStarted={() => setStep(1)}
-      inputs={inputs}
-      projections={projections}
-    >
+    <CalculatorShell step={step} onGetStarted={() => setStep(1)}>
       {content}
     </CalculatorShell>
   )
