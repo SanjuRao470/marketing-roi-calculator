@@ -7,7 +7,7 @@ export default function LandingPage({ onStart }) {
         <SiteHeader onGetStarted={onStart} />
 
         <div className="px-6 pb-8 sm:px-10 sm:pb-10">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bmm-navy-deep via-[#1e3a5f] to-bmm-blue-figma px-8 py-12 text-white shadow-hero sm:px-12 sm:py-14">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-bmm-navy-deep via-[#1e3a5f] to-bmm-blue px-8 py-12 text-white shadow-hero sm:px-12 sm:py-14">
             <div
               className="pointer-events-none absolute -right-8 -top-8 h-48 w-48 rounded-full border border-white/10"
               aria-hidden

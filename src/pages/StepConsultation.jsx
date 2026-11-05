@@ -121,6 +121,12 @@ export default function StepConsultation({
 
           <dl className="mt-6 space-y-0 divide-y divide-bmm-line border-t border-bmm-line text-sm">
             <div className="flex justify-between gap-4 py-3">
+              <dt className="text-bmm-muted">Current monthly revenue</dt>
+              <dd className="font-semibold tabular-nums">
+                {formatCurrency(inputs.currentMonthlyRevenue)}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4 py-3">
               <dt className="text-bmm-muted">Additional revenue target</dt>
               <dd className="font-semibold tabular-nums">
                 {formatCurrency(projections.additionalRevenue)}
@@ -130,6 +136,12 @@ export default function StepConsultation({
               <dt className="text-bmm-muted">Estimated leads needed</dt>
               <dd className="font-semibold tabular-nums">
                 {formatNumber(projections.requiredLeads, 0)}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4 py-3">
+              <dt className="text-bmm-muted">Marketing ROI</dt>
+              <dd className="font-semibold tabular-nums">
+                {formatNumber(projections.marketingRoi, 1)}%
               </dd>
             </div>
             <div className="flex justify-between gap-4 py-3">

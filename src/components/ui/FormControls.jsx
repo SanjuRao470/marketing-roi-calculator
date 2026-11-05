@@ -1,6 +1,12 @@
 import { useId, useState } from 'react'
 import { IconArrowLeft, IconArrowRight, IconMinus } from './Icons'
 
+function parseNumberInput(raw) {
+  if (raw === '' || raw === null || raw === undefined) return 0
+  const n = Number(raw)
+  return Number.isFinite(n) ? n : 0
+}
+
 function FieldTooltip({ text }) {
   const [open, setOpen] = useState(false)
   const id = useId()
@@ -43,7 +49,15 @@ function Label({ htmlFor, children, tooltip }) {
   )
 }
 
-export function TextField({ id, label, value, onChange, placeholder, type = 'text', required }) {
+export function TextField({
+  id,
+  label,
+  value,
+  onChange,
+  placeholder,
+  type = 'text',
+  required,
+}) {
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-bmm-ink">
@@ -92,7 +106,16 @@ export function SelectField({ id, label, tooltip, value, onChange, options }) {
   )
 }
 
-export function CurrencyField({ id, label, hint, tooltip, value, onChange, step = 1 }) {
+export function CurrencyField({
+  id,
+  label,
+  hint,
+  tooltip,
+  value,
+  onChange,
+  step = 1,
+  min = 0,
+}) {
   return (
     <div>
       <Label htmlFor={id} tooltip={tooltip}>
@@ -105,11 +128,12 @@ export function CurrencyField({ id, label, hint, tooltip, value, onChange, step 
         <input
           id={id}
           type="number"
-          min={0}
+          inputMode="decimal"
+          min={min}
           step={step}
-          value={value}
-          onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-          className="field-input pl-7"
+          value={Number.isFinite(value) ? value : 0}
+          onChange={(e) => onChange(parseNumberInput(e.target.value))}
+          className="field-input pl-7 tabular-nums"
         />
       </div>
       {hint && <p className="mt-1.5 text-xs leading-relaxed text-bmm-muted">{hint}</p>}
@@ -117,7 +141,17 @@ export function CurrencyField({ id, label, hint, tooltip, value, onChange, step 
   )
 }
 
-export function NumberField({ id, label, hint, tooltip, value, onChange, step = 1 }) {
+export function NumberField({
+  id,
+  label,
+  hint,
+  tooltip,
+  value,
+  onChange,
+  step = 1,
+  min = 0,
+  max,
+}) {
   return (
     <div>
       <Label htmlFor={id} tooltip={tooltip}>
@@ -126,11 +160,13 @@ export function NumberField({ id, label, hint, tooltip, value, onChange, step = 
       <input
         id={id}
         type="number"
-        min={0}
+        inputMode="numeric"
+        min={min}
+        max={max}
         step={step}
-        value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
-        className="field-input"
+        value={Number.isFinite(value) ? value : 0}
+        onChange={(e) => onChange(parseNumberInput(e.target.value))}
+        className="field-input tabular-nums"
       />
       {hint && <p className="mt-1.5 text-xs leading-relaxed text-bmm-muted">{hint}</p>}
     </div>
@@ -147,17 +183,30 @@ export function SliderField({
   max = 100,
   step = 1,
   suffix = '%',
+  numberStep = 0.5,
 }) {
+  const clamp = (n) => Math.min(max, Math.max(min, n))
+
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between gap-3">
         <Label htmlFor={id} tooltip={tooltip}>
           {label}
         </Label>
-        <span className="text-sm font-semibold tabular-nums text-bmm-ink">
-          {value}
-          {suffix}
-        </span>
+        <div className="flex items-center gap-1.5">
+          <input
+            type="number"
+            inputMode="decimal"
+            min={min}
+            max={max}
+            step={numberStep}
+            value={Number.isFinite(value) ? value : min}
+            onChange={(e) => onChange(clamp(parseNumberInput(e.target.value)))}
+            className="field-input !w-[4.5rem] py-1.5 text-center text-sm tabular-nums"
+            aria-label={`${label} numeric value`}
+          />
+          <span className="text-sm font-medium text-bmm-muted">{suffix}</span>
+        </div>
       </div>
       <input
         id={id}
@@ -166,7 +215,7 @@ export function SliderField({
         max={max}
         step={step}
         value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
+        onChange={(e) => onChange(parseNumberInput(e.target.value))}
         className="accent-bmm-blue"
       />
     </div>
